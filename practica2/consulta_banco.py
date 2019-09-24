@@ -16,7 +16,7 @@ class ExchangeAPIClient:
 
 def escribir_datos(saldo,fecha):
     salida=open("ahorros.txt",'a+')
-    salida.write('{0} {1} \n'.format(fecha,saldo))
+    salida.write('{0}, {1} \n'.format(fecha,saldo))
     salida.close()
     
 def leer_datos():
