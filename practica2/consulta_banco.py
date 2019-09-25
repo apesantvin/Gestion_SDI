@@ -9,14 +9,14 @@ class ExchangeAPIClient:
     def get_datos(self):
         api_url = 'https://api.exchangeratesapi.io/latest'
         response = urlopen(api_url)
-        return  json.loads(response.read())
+        self.bbdd=json.loads(response.read())
 
     def convert(self,cantidad, de):
         return cantidad/self.bbdd['rates'][de]
 
 def escribir_datos(saldo,fecha):
     salida=open("ahorros.txt",'a+')
-    salida.write('{0}, {1} \n'.format(fecha,saldo))
+    salida.write('{0}, {1} \n'.format(fecha,int(saldo)))
     salida.close()
     
 def leer_datos():
@@ -28,7 +28,7 @@ def leer_datos():
 
 if __name__== '__main__':
     bbdd_web=ExchangeAPIClient()
-    bbdd_web.bbdd=bbdd_web.get_datos()
+    bbdd_web.get_datos()
     cantidad_total=0
     datos=leer_datos()
     for element in datos:
