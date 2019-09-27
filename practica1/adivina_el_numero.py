@@ -7,7 +7,7 @@ class Jugador:
         self.intentos=0
 
 def getRandom(a,b):
-	return random.randrange(a,b)jugador
+	return random.randrange(a,b)
 
 class partida:
     
@@ -34,13 +34,21 @@ class partida:
             maquina.intentos+=1
             res_jugador=input("Mayor/Menor/Correcto? ")
             if res_jugador=='Mayor':
-                min=numero_maq+1
-            elif res_jugador=='Menor':  
-                max=numero_maq-1
+                if max!=numero_maq:
+                    min=numero_maq+1
+                else:
+                    maquina.intentos-=1
+            elif res_jugador=='Menor':
+                if min!=numero_maq:
+                    max=numero_maq-1
+                else:
+                    maquina.intentos-=1
             if (min!=max):
                 numero_maq=getRandom(min,max)
             else:
-                numero_maq=min
+                print("Solo queda un numero posible, el {} es tu numero.\n".format(min))
+                maquina.intentos+=1
+                break
         
     def jugar_partida(self):
         maquina=Jugador('CPU','Maquina')
@@ -49,9 +57,7 @@ class partida:
         repetir='S'
         while (repetir=='S'):
             self.adivina_jugador(jugador.nombre,jugador)
-            print("{}\n".format(jugador.intentos))
             self.adivina_maquina(maquina)
-            print("{} {}\n".format(jugador.intentos,maquina.intentos))
             if jugador.intentos>maquina.intentos:
                 resultado="Yo gano."
             elif jugador.intentos<maquina.intentos:
