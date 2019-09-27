@@ -43,6 +43,8 @@ class partida:
                     max=numero_maq-1
                 else:
                     maquina.intentos-=1
+            elif res_jugador!='Correcto':
+                maquina.intentos-=1
             if (min!=max):
                 numero_maq=getRandom(min,max)
             else:
